@@ -136,6 +136,15 @@ section { overflow: hidden; }
     align-items: center;
     justify-content: center;
     transition: transform 1s ease-in-out;
+    padding: 20px; /* Safe area for mobile */
+}
+
+.opening-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
 }
 
 .opening-overlay.closed {
@@ -326,16 +335,83 @@ section { overflow: hidden; }
     border: 1px dashed var(--gold-primary);
 }
 
-/* Responsive */
+/* Responsive Design & Mobile Optimization */
+
+/* Extra Large Screens (Desktops) */
+@media screen and (min-width: 1200px) {
+    .container { max-width: 1140px; }
+}
+
+/* Medium & Small Screens (Tablets & Phones) */
+@media screen and (max-width: 991px) {
+    .section-padding { padding: 80px 0; }
+    .section-title { font-size: 2.5rem; }
+    .display-1 { font-size: 4rem; }
+}
+
 @media screen and (max-width: 768px) {
+    .section-padding { padding: 60px 0; }
     .section-title { font-size: 2.2rem; }
-    .display-1 { font-size: 3.5rem; }
+    .display-1 { font-size: 3rem; }
+    
+    /* Timeline Mobile Fix */
     .timeline::after { left: 31px; }
-    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left !important; }
     .timeline-item.right { left: 0; }
     .timeline-item::after { left: 25px; }
     .timeline-item.right::after { left: 25px; }
-    .hero { background-position: 70% center; }
-    .countdown { flex-wrap: wrap; }
-    .countdown-item { padding: 10px; min-width: 80px; }
+
+    /* Hero & Countdown */
+    .hero { 
+        background-position: center center !important; /* Precisely centered for mobile */
+        padding-top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .hero-content {
+        margin-top: -20px; /* Slight adjustment to lift the content */
+    }
+    .monogram-small { 
+        width: 100px; 
+        height: 100px; 
+        font-size: 1.8rem;
+        margin: 0 auto 20px auto !important; /* Centered and spaced above names */
+    }
+    .monogram-small .amp { font-size: 0.9rem; }
+    
+    .display-1 { 
+        font-size: 2.8rem; 
+        line-height: 1.2;
+        margin-bottom: 15px !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .section-title { font-size: 1.8rem; }
+    .display-1 { font-size: 2.5rem; }
+    .hero-content { padding: 0 15px; }
+    
+    /* Buttons */
+    .btn { width: 100%; margin-bottom: 10px; }
+    
+    /* Countdown 2x2 */
+    .countdown-item { 
+        padding: 8px; 
+        min-width: 60px; 
+    }
+    
+    /* Event Info */
+    .event-info li { font-size: 0.9rem; }
+    
+    /* Modals */
+    .modal-dialog { margin: 10px; }
+    .pix-key-box { padding: 10px !important; }
+    .pix-key-box span { font-size: 0.9rem; word-break: break-all; }
+}
+
+/* Landscape orientation adjustments */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero { height: auto; padding: 100px 0; }
+    .opening-content { padding: 20px 0; }
 }

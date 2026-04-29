@@ -17,22 +17,37 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom CSS -->
+    <!-- CSS Personalizado -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Preloader / Welcome -->
+    <!-- Pré-carregamento / Boas-vindas -->
     <div id="opening-invitation" class="opening-overlay">
-        <div class="opening-content text-center">
-            <div class="monogram mb-4">G <span class="amp">&</span> D</div>
-            <h1 class="serif mb-4">Gabriel & Danielle</h1>
-            <p class="mb-4">O amor é a única coisa que cresce à medida que se reparte.</p>
-            <button id="btn-open" class="btn btn-primary-gold px-5 py-3">Abrir Convite</button>
+        <div class="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="envelope-back"></div>
+                <div class="letter">
+                    <div class="monogram-letter mb-2">D <span class="amp">&</span> G</div>
+                    <p class="serif mb-1 letter-names">Danielle & Gabriel</p>
+                    <small class="text-gold">12.09.2026</small>
+                </div>
+                <div class="envelope-left"></div>
+                <div class="envelope-right"></div>
+                <div class="envelope-bottom"></div>
+                <div class="envelope-top"></div>
+                <div class="wax-seal"></div>
+            </div>
+            
+            <div class="opening-content text-center mt-5">
+                <p class="mb-4 text-white quote-text">"O amor não se alegra com a injustiça, mas se alegra com a verdade. Tudo sofre, tudo crê, tudo espera, tudo suporta."</p>
+                <p class="mb-4 text-white">1 Coríntios 13:6-7</p>
+                <p class="text-white opacity-75 small animate-pulse"><i class="fas fa-envelope-open-text me-2"></i>Clique no envelope para abrir</p>
+            </div>
         </div>
     </div>
 
-    <!-- Music Player -->
+    <!-- Player de Música -->
     <div class="music-player">
         <button id="btn-music" class="music-btn" aria-label="Toggle Music">
             <i class="fas fa-music"></i>
@@ -42,12 +57,12 @@
         </audio>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Seção Hero -->
     <header class="hero d-flex align-items-center justify-content-center text-center text-white">
         <div class="hero-overlay"></div>
         <div class="hero-content container position-relative animate-on-scroll">
-            <div class="monogram-small mb-3">G <span class="amp">&</span> D</div>
-            <h1 class="display-1 serif mb-2">Gabriel & Danielle</h1>
+            <div class="monogram-small mb-3">D <span class="amp">&</span> G</div>
+            <h2 class="display-1 serif mb-2">Danielle & Gabriel</h2>
             <p class="lead mb-4">12 de Setembro de 2026</p>
             <div class="countdown d-flex justify-content-center gap-3 mb-5" id="countdown">
                 <div class="countdown-item">
@@ -105,25 +120,33 @@
                 <div class="divider mx-auto"></div>
             </div>
             <div class="row g-4 animate-on-scroll">
-                <div class="col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/gallery_1.png">
-                        <img src="assets/images/gallery_1.png" alt="Wedding Detail 1" class="img-fluid rounded shadow-sm">
+                <div class="col-6 col-md-4">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/AliançaNoivado.jpeg">
+                        <img src="assets/images/AliançaNoivado.jpeg" alt="Wedding Detail 1" class="img-fluid rounded shadow-sm">
                         <div class="gallery-hover">
                             <i class="fas fa-search-plus"></i>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/gallery_2.png">
-                        <img src="assets/images/gallery_2.png" alt="Wedding Detail 2" class="img-fluid rounded shadow-sm">
+                <div class="col-6 col-md-4">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/gaiola.jpeg">
+                        <img src="assets/images/gaiola.jpeg" alt="Wedding Detail 2" class="img-fluid rounded shadow-sm">
                         <div class="gallery-hover">
                             <i class="fas fa-search-plus"></i>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/gallery_3.png">
-                        <img src="assets/images/gallery_3.png" alt="Wedding Detail 3" class="img-fluid rounded shadow-sm">
+                <div class="col-6 col-md-4">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/AliançaCasamento.jpeg">
+                        <img src="assets/images/AliançaCasamento.jpeg" alt="Wedding Detail 3" class="img-fluid rounded shadow-sm">
+                        <div class="gallery-hover">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="assets/images/casal.jpeg">
+                        <img src="assets/images/casal.jpeg" alt="Wedding Detail 4" class="img-fluid rounded shadow-sm">
                         <div class="gallery-hover">
                             <i class="fas fa-search-plus"></i>
                         </div>
@@ -142,7 +165,7 @@
                     <p class="mb-4">Celebre conosco este momento especial em um local cercado pela natureza e boas energias.</p>
                     <ul class="list-unstyled event-info">
                         <li class="mb-3">
-                            <i class="far fa-calendar-alt me-2"></i> 05 de Setembro de 2026 às 16:30h
+                            <i class="far fa-calendar-alt me-2"></i> 12 de Setembro de 2026 às 16:30h
                         </li>
                         <li class="mb-3">
                             <i class="fas fa-map-marker-alt me-2"></i> Igreja Presbiteriana do Hauer
@@ -171,7 +194,7 @@
             <div class="text-center mb-5 animate-on-scroll">
                 <h2 class="serif section-title">Confirmar Presença</h2>
                 <div class="divider mx-auto"></div>
-                <p class="text-muted">Por favor, confirme sua presença até 05/08/2026.</p>
+                <p class="text-muted">Por favor, confirme sua presença até 12/08/2026.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-7 animate-on-scroll">
@@ -193,22 +216,22 @@
                             <label class="form-label d-block">Você comparecerá?</label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="attendance" id="attending" value="yes" checked>
-                                <label class="form-check-label" for="attending">Sim, com certeza!</label>
+                                <label class="form-check-label" for="attending">Sim, com certeza! 😍</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="attendance" id="not-attending" value="no">
-                                <label class="form-check-label" for="not-attending">Infelizmente não posso</label>
+                                <label class="form-check-label" for="not-attending">Infelizmente não posso 😔</label>
                             </div>
                         </div>
                         <div class="mb-4">
                             <label class="form-label d-block">Confirmar com:</label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="contact" id="contact-groom" value="5541999088969" checked>
-                                <label class="form-check-label" for="contact-groom">Gabriel (Noivo)</label>
+                                <label class="form-check-label" for="contact-groom">Gabriel (Noivo) 🤵🏻</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="contact" id="contact-bride" value="5541996075900">
-                                <label class="form-check-label" for="contact-bride">Danielle (Noiva)</label>
+                                <label class="form-check-label" for="contact-bride">Danielle (Noiva) 👰🏻</label>
                             </div>
                         </div>
                         <div class="mb-4">
@@ -253,7 +276,7 @@
         </div>
     </footer>
 
-    <!-- Modal PIX -->
+    <!-- Modal do PIX -->
     <div class="modal fade" id="pixModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg">
@@ -291,7 +314,7 @@
         </div>
     </div>
 
-    <!-- Modal Galeria -->
+    <!-- Modal da Galeria -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0 bg-transparent">
@@ -305,7 +328,7 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
+    <!-- JS Personalizado -->
     <script src="js/script.js"></script>
 </body>
 </html>

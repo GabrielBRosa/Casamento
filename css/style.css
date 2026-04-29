@@ -1,4 +1,4 @@
-/* Design System & Variables */
+/* Sistema de Design e Variáveis */
 :root {
     --nude-light: #FBF7F2;
     --nude-medium: #F5E6D3;
@@ -11,9 +11,15 @@
     --font-serif: 'Playfair Display', serif;
     --font-sans: 'Montserrat', sans-serif;
     --transition: all 0.4s ease;
+    
+    /* Tamanhos do Logo */
+    --logo-size: 150px;
+    --logo-font-size: 3.5rem;
+    --logo-small-size: 120px; /* Preenche melhor o "quadrado maior" centralizado */
+    --logo-small-font-size: 2.5rem;
 }
 
-/* Global Styles */
+/* Estilos Globais */
 body {
     font-family: var(--font-sans);
     color: var(--text-dark);
@@ -43,7 +49,7 @@ section { overflow: hidden; }
     margin-bottom: 30px;
 }
 
-/* Buttons */
+/* Botões */
 .btn-primary-gold {
     background-color: var(--gold-primary);
     border: none;
@@ -81,31 +87,213 @@ section { overflow: hidden; }
     color: var(--text-dark);
 }
 
-/* Monogram */
+/* Monograma */
 .monogram {
     font-family: var(--font-serif);
-    font-size: 3.5rem; /* Increased for better visibility */
+    font-size: var(--logo-font-size);
     color: var(--gold-primary);
     border: 2px solid var(--gold-primary);
-    width: 150px;
-    height: 150px;
+    width: var(--logo-size);
+    height: var(--logo-size);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     margin: 0 auto;
     line-height: 1;
+    transition: var(--transition);
 }
 
 .monogram .amp {
-    font-size: 1.5rem; /* Smaller ampersand */
+    font-size: 1.5rem; /* Ampersand menor */
     margin: 0 8px;
     opacity: 0.7;
 }
 
 .monogram-small {
     font-family: var(--font-serif);
+    font-size: var(--logo-small-font-size);
+    color: var(--gold-primary);
+    border: 1px solid var(--gold-primary);
+    width: var(--logo-small-size);
+    height: var(--logo-small-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+    margin: 0 auto; /* Centraliza no desktop */
+    transition: var(--transition);
+}
+
+.monogram-small .amp {
+    font-size: 0.6rem;
+    margin: 0 3px;
+    opacity: 0.7;
+}
+
+/* Overlay de Abertura (Design do Envelope) */
+.opening-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--olive-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+    padding: 20px;
+}
+
+.opening-overlay.closed {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin: 0 auto;
+    perspective: 1000px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.02);
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.envelope > div:not(.letter):not(.wax-seal) {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.envelope-back {
+    background-color: #d1bda1;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.letter {
+    position: absolute;
+    top: 10%; left: 5%; width: 90%; height: 85%;
+    background-color: var(--white);
+    border-radius: 4px;
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.envelope-left {
+    background-color: #dfcca9;
+    clip-path: polygon(0 0, 52% 50%, 0 100%);
+    z-index: 3;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.envelope-right {
+    background-color: #dfcca9;
+    clip-path: polygon(100% 0, 100% 100%, 48% 50%);
+    z-index: 3;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.envelope-bottom {
+    background-color: #e5d4b5;
+    clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+    z-index: 4;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.envelope-top {
+    background-color: var(--nude-medium);
+    clip-path: polygon(0 0, 100% 0, 50% 55%);
+    z-index: 5;
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.6s;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    backface-visibility: hidden;
+}
+
+/* Selo de Cera */
+.wax-seal {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #9b111e 40%, #720e15 100%);
+    border-radius: 50%;
+    z-index: 6;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wax-seal::after {
+    content: 'D&G';
+    font-family: var(--font-serif);
+    color: rgba(255,255,255,0.7);
     font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+/* Estado Aberto */
+.envelope.open .envelope-top {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+.envelope.open .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+}
+.envelope.open .letter {
+    transform: translateY(-50%);
+    z-index: 2; /* Mantém atrás da aba inferior, mas acima do fundo */
+}
+
+/* Conteúdo da Carta */
+.monogram-letter {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
     color: var(--gold-primary);
     border: 1px solid var(--gold-primary);
     width: 60px;
@@ -116,45 +304,31 @@ section { overflow: hidden; }
     border-radius: 50%;
     line-height: 1;
 }
-
-.monogram-small .amp {
-    font-size: 0.6rem;
-    margin: 0 3px;
-    opacity: 0.7;
+.monogram-letter .amp {
+    font-size: 0.8rem;
+    margin: 0 4px;
 }
-
-/* Opening Overlay */
-.opening-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--nude-medium);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 1s ease-in-out;
-    padding: 20px; /* Safe area for mobile */
+.letter-names {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-dark);
 }
 
 .opening-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     max-width: 500px;
+    z-index: 2;
 }
 
-.opening-overlay.closed {
-    transform: translateY(-100%);
+.quote-text {
+    font-size: 1.05rem;
+    font-style: italic;
+    opacity: 0.9;
 }
 
-/* Hero Section */
+/* Seção Hero */
 .hero {
     height: 100vh;
-    background: url('../assets/images/hero.png') center/cover no-repeat;
+    background: url('../assets/images/beijoperto.jpeg') center/cover no-repeat;
     position: relative;
     padding-top: 50px;
 }
@@ -168,7 +342,7 @@ section { overflow: hidden; }
     background: rgba(0, 0, 0, 0.4);
 }
 
-/* Countdown */
+/* Contagem Regressiva */
 .countdown-item {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
@@ -188,7 +362,7 @@ section { overflow: hidden; }
     letter-spacing: 2px;
 }
 
-/* Music Btn */
+/* Botão de Música */
 .music-player {
     position: fixed;
     bottom: 30px;
@@ -217,7 +391,7 @@ section { overflow: hidden; }
     to { transform: rotate(360deg); }
 }
 
-/* Timeline */
+/* Linha do Tempo */
 .timeline {
     position: relative;
     max-width: 800px;
@@ -262,7 +436,7 @@ section { overflow: hidden; }
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-/* Gallery */
+/* Galeria */
 .gallery-item {
     cursor: pointer;
     overflow: hidden;
@@ -294,7 +468,7 @@ section { overflow: hidden; }
     opacity: 1;
 }
 
-/* RSVP Form */
+/* Formulário de RSVP */
 .rsvp-form {
     background-color: var(--white);
 }
@@ -308,7 +482,7 @@ section { overflow: hidden; }
     box-shadow: none;
 }
 
-/* Animations */
+/* Animações */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -319,7 +493,7 @@ section { overflow: hidden; }
     transform: translateY(0);
 }
 
-/* PIX Modal Custom */
+/* Customização do Modal PIX */
 .btn-gold-copy {
     background: var(--gold-primary);
     color: var(--white);
@@ -335,14 +509,14 @@ section { overflow: hidden; }
     border: 1px dashed var(--gold-primary);
 }
 
-/* Responsive Design & Mobile Optimization */
+/* Design Responsivo e Otimização Mobile */
 
-/* Extra Large Screens (Desktops) */
+/* Telas Extra Grandes (Desktops) */
 @media screen and (min-width: 1200px) {
     .container { max-width: 1140px; }
 }
 
-/* Medium & Small Screens (Tablets & Phones) */
+/* Telas Médias e Pequenas (Tablets e Celulares) */
 @media screen and (max-width: 991px) {
     .section-padding { padding: 80px 0; }
     .section-title { font-size: 2.5rem; }
@@ -354,29 +528,33 @@ section { overflow: hidden; }
     .section-title { font-size: 2.2rem; }
     .display-1 { font-size: 3rem; }
     
-    /* Timeline Mobile Fix */
+    /* Correção da Linha do Tempo para Mobile */
     .timeline::after { left: 31px; }
     .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left !important; }
     .timeline-item.right { left: 0; }
     .timeline-item::after { left: 25px; }
     .timeline-item.right::after { left: 25px; }
 
-    /* Hero & Countdown */
+    /* Hero e Contagem Regressiva */
     .hero { 
-        background-position: center center !important; /* Precisely centered for mobile */
+        background-position: center center !important; /* Precisamente centralizado para mobile */
         padding-top: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
     .hero-content {
-        margin-top: -20px; /* Slight adjustment to lift the content */
+        margin-top: -20px; /* Pequeno ajuste para elevar o conteúdo */
     }
+    .monogram {
+        --logo-size: 120px;
+        --logo-font-size: 2.8rem;
+    }
+
     .monogram-small { 
-        width: 100px; 
-        height: 100px; 
-        font-size: 1.8rem;
-        margin: 0 auto 20px auto !important; /* Centered and spaced above names */
+        --logo-small-size: 100px;
+        --logo-small-font-size: 1.8rem;
+        margin: 0 auto 20px auto !important; /* Centralizado e com espaço acima dos nomes */
     }
     .monogram-small .amp { font-size: 0.9rem; }
     
@@ -385,6 +563,15 @@ section { overflow: hidden; }
         line-height: 1.2;
         margin-bottom: 15px !important;
     }
+
+    /* Ajustes da Galeria para Mobile */
+    .gallery-item {
+        aspect-ratio: 1 / 1;
+    }
+    .gallery-item img {
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -392,25 +579,32 @@ section { overflow: hidden; }
     .display-1 { font-size: 2.5rem; }
     .hero-content { padding: 0 15px; }
     
-    /* Buttons */
+    /* Botões */
     .btn { width: 100%; margin-bottom: 10px; }
     
-    /* Countdown 2x2 */
+    /* Contagem Regressiva 2x2 */
     .countdown-item { 
         padding: 8px; 
         min-width: 60px; 
     }
     
-    /* Event Info */
+    /* Informações do Evento */
     .event-info li { font-size: 0.9rem; }
     
-    /* Modals */
+    /* Modais */
     .modal-dialog { margin: 10px; }
     .pix-key-box { padding: 10px !important; }
     .pix-key-box span { font-size: 0.9rem; word-break: break-all; }
+
+    /* Logo extra pequeno para celulares pequenos */
+    .monogram {
+        --logo-size: 100px;
+        --logo-font-size: 2.22rem;
+    }
+    .monogram .amp { font-size: 1rem; }
 }
 
-/* Landscape orientation adjustments */
+/* Ajustes para orientação paisagem */
 @media screen and (max-height: 500px) and (orientation: landscape) {
     .hero { height: auto; padding: 100px 0; }
     .opening-content { padding: 20px 0; }

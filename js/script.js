@@ -1,24 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- Opening Animation ---
-    const btnOpen = document.getElementById('btn-open');
+    // --- Animação de Abertura ---
+    const envelope = document.getElementById('envelope');
     const openingOverlay = document.getElementById('opening-invitation');
     const bgMusic = document.getElementById('bg-music');
     const btnMusic = document.getElementById('btn-music');
 
-    btnOpen.addEventListener('click', () => {
-        openingOverlay.classList.add('closed');
-        // Start music on click (browser policy usually needs interaction)
+    envelope.addEventListener('click', () => {
+        envelope.classList.add('open');
+
+        // Inicia a música ao clicar (política dos navegadores exige interação do usuário)
         bgMusic.play();
         btnMusic.classList.add('playing');
         
-        // Remove overlay from DOM after animation
+        // Espera a animação do envelope terminar antes de remover o overlay
         setTimeout(() => {
-            openingOverlay.style.display = 'none';
-        }, 1000);
+            openingOverlay.classList.add('closed');
+            // Remove o overlay do DOM após a animação de deslize
+            setTimeout(() => {
+                openingOverlay.style.display = 'none';
+            }, 1000);
+        }, 1500);
     });
 
-    // --- Music Toggle ---
+    // --- Controle da Música ---
     btnMusic.addEventListener('click', () => {
         if (bgMusic.paused) {
             bgMusic.play();
@@ -29,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Countdown Timer ---
-    const targetDate = new Date('September 5, 2026 16:30:00').getTime();
+    // --- Temporizador de Contagem Regressiva ---
+    const targetDate = new Date('September 12, 2026 16:30:00').getTime();
 
     const updateCountdown = () => {
         const now = new Date().getTime();
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // --- Scroll Animations (Intersection Observer) ---
+    // --- Animações de Scroll (Intersection Observer) ---
     const observerOptions = {
         threshold: 0.1
     };
@@ -71,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
 
-    // --- Gallery Modal ---
+    // --- Modal da Galeria ---
     const imageModal = document.getElementById('imageModal');
     if (imageModal) {
         imageModal.addEventListener('show.bs.modal', (event) => {
@@ -82,18 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- RSVP Form ---
+    // --- Formulário de RSVP ---
     const rsvpForm = document.getElementById('rsvp-form');
     const rsvpFeedback = document.getElementById('rsvp-feedback');
 
     rsvpForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // Basic validation check (Bootstrap handles most via required)
+        // Validação básica (o Bootstrap lida com a maioria via atributo required)
         const name = document.getElementById('name').value;
         if (!name) return;
 
-        // Simulate API loading
+        // Simula o carregamento da API
         const btnSubmit = rsvpForm.querySelector('button[type="submit"]');
         const originalText = btnSubmit.innerText;
         btnSubmit.disabled = true;
@@ -103,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rsvpForm.classList.add('d-none');
             rsvpFeedback.classList.remove('d-none');
             
-            // --- WhatsApp Integration ---
+            // --- Integração com WhatsApp ---
             const phoneNumber = rsvpForm.querySelector('input[name="contact"]:checked').value;
             const attendance = rsvpForm.querySelector('input[name="attendance"]:checked').value === 'yes' ? 'Sim, com certeza!' : 'Infelizmente não posso';
             const guestCount = document.getElementById('guests').value;
@@ -118,12 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(waText)}`;
             
-            // Redirect to WhatsApp after showing the success message for 1.5s
+            // Redireciona para o WhatsApp após mostrar a mensagem de sucesso por 1.5s
             setTimeout(() => {
                 window.open(waUrl, '_blank');
             }, 1500);
 
-            // Log for verification
+            // Log para verificação
             console.log("RSVP Submitted:", {
                 name,
                 guests: guestCount,
@@ -133,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     });
 
-    // --- Smooth Scroll Fix (Optional for legacy browsers) ---
+    // --- Correção de Scroll Suave (Opcional para navegadores antigos) ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -148,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// --- PIX Copy Function ---
+// --- Função de Copiar PIX ---
 function copyPix(elementId) {
     const pixText = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(pixText).then(() => {

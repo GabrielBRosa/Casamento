@@ -1,0 +1,611 @@
+/* Sistema de Design e Variáveis */
+:root {
+    --nude-light: #FBF7F2;
+    --nude-medium: #F5E6D3;
+    --gold-primary: #C5A059;
+    --gold-dark: #A67C00;
+    --olive-dark: #556B2F;
+    --white: #FFFFFF;
+    --text-dark: #333333;
+    --text-muted: #777777;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --transition: all 0.4s ease;
+    
+    /* Tamanhos do Logo */
+    --logo-size: 150px;
+    --logo-font-size: 3.5rem;
+    --logo-small-size: 120px; /* Preenche melhor o "quadrado maior" centralizado */
+    --logo-small-font-size: 2.5rem;
+}
+
+/* Estilos Globais */
+body {
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+    background-color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.serif { font-family: var(--font-serif); }
+.italic { font-style: italic; }
+.text-gold { color: var(--gold-primary); }
+.bg-nude { background-color: var(--nude-light); }
+.bg-olive { background-color: var(--olive-dark); }
+
+section { overflow: hidden; }
+.section-padding { padding: 100px 0; }
+.section-title { 
+    font-size: 3rem; 
+    margin-bottom: 20px; 
+    position: relative;
+}
+
+.divider {
+    width: 60px;
+    height: 2px;
+    background-color: var(--gold-primary);
+    margin-bottom: 30px;
+}
+
+/* Botões */
+.btn-primary-gold {
+    background-color: var(--gold-primary);
+    border: none;
+    color: var(--white);
+    transition: var(--transition);
+    border-radius: 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.btn-primary-gold:hover {
+    background-color: var(--gold-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-outline-gold {
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-primary);
+    border-radius: 0;
+    transition: var(--transition);
+}
+.btn-outline-gold:hover {
+    background-color: var(--gold-primary);
+    color: var(--white);
+}
+
+.btn-outline-white {
+    border: 1px solid var(--white);
+    color: var(--white);
+    border-radius: 0;
+    transition: var(--transition);
+}
+.btn-outline-white:hover {
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+/* Monograma */
+.monogram {
+    font-family: var(--font-serif);
+    font-size: var(--logo-font-size);
+    color: var(--gold-primary);
+    border: 2px solid var(--gold-primary);
+    width: var(--logo-size);
+    height: var(--logo-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.monogram .amp {
+    font-size: 1.5rem; /* Ampersand menor */
+    margin: 0 8px;
+    opacity: 0.7;
+}
+
+.monogram-small {
+    font-family: var(--font-serif);
+    font-size: var(--logo-small-font-size);
+    color: var(--gold-primary);
+    border: 1px solid var(--gold-primary);
+    width: var(--logo-small-size);
+    height: var(--logo-small-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+    margin: 0 auto; /* Centraliza no desktop */
+    transition: var(--transition);
+}
+
+.monogram-small .amp {
+    font-size: 0.6rem;
+    margin: 0 3px;
+    opacity: 0.7;
+}
+
+/* Overlay de Abertura (Design do Envelope) */
+.opening-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--olive-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+    padding: 20px;
+}
+
+.opening-overlay.closed {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin: 0 auto;
+    perspective: 1000px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.02);
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.envelope > div:not(.letter):not(.wax-seal) {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.envelope-back {
+    background-color: #d1bda1;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.letter {
+    position: absolute;
+    top: 10%; left: 5%; width: 90%; height: 85%;
+    background-color: var(--white);
+    border-radius: 4px;
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.envelope-left {
+    background-color: #dfcca9;
+    clip-path: polygon(0 0, 52% 50%, 0 100%);
+    z-index: 3;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.envelope-right {
+    background-color: #dfcca9;
+    clip-path: polygon(100% 0, 100% 100%, 48% 50%);
+    z-index: 3;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.envelope-bottom {
+    background-color: #e5d4b5;
+    clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+    z-index: 4;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.envelope-top {
+    background-color: var(--nude-medium);
+    clip-path: polygon(0 0, 100% 0, 50% 55%);
+    z-index: 5;
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.6s;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    backface-visibility: hidden;
+}
+
+/* Selo de Cera */
+.wax-seal {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #9b111e 40%, #720e15 100%);
+    border-radius: 50%;
+    z-index: 6;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wax-seal::after {
+    content: 'D&G';
+    font-family: var(--font-serif);
+    color: rgba(255,255,255,0.7);
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+/* Estado Aberto */
+.envelope.open .envelope-top {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+.envelope.open .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+}
+.envelope.open .letter {
+    transform: translateY(-50%);
+    z-index: 2; /* Mantém atrás da aba inferior, mas acima do fundo */
+}
+
+/* Conteúdo da Carta */
+.monogram-letter {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--gold-primary);
+    border: 1px solid var(--gold-primary);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+}
+.monogram-letter .amp {
+    font-size: 0.8rem;
+    margin: 0 4px;
+}
+.letter-names {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.opening-content {
+    max-width: 500px;
+    z-index: 2;
+}
+
+.quote-text {
+    font-size: 1.05rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Seção Hero */
+.hero {
+    height: 100vh;
+    background: url('../assets/images/beijoperto.jpeg') center/cover no-repeat;
+    position: relative;
+    padding-top: 50px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Contagem Regressiva */
+.countdown-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    min-width: 100px;
+    border-radius: 5px;
+}
+.countdown-item span {
+    display: block;
+    font-size: 2.5rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+}
+.countdown-item small {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+/* Botão de Música */
+.music-player {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1000;
+}
+.music-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--white);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: var(--gold-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+.music-btn.playing {
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Linha do Tempo */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background-color: var(--gold-primary);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -0.5px;
+}
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: -6px;
+    background-color: var(--gold-primary);
+    border: 2px solid var(--white);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-item.left { left: 0; }
+.timeline-item.right { left: 50%; }
+.timeline-item.right::after { left: -6px; }
+
+.timeline-content {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Galeria */
+.gallery-item {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+.gallery-item img {
+    transition: transform 0.6s ease;
+    width: 100%;
+}
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+.gallery-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(197, 160, 89, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+    color: var(--white);
+    font-size: 2rem;
+}
+.gallery-item:hover .gallery-hover {
+    opacity: 1;
+}
+
+/* Formulário de RSVP */
+.rsvp-form {
+    background-color: var(--white);
+}
+.form-control, .form-select {
+    border: 1px solid #eee;
+    border-radius: 0;
+    padding: 12px;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--gold-primary);
+    box-shadow: none;
+}
+
+/* Animações */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-on-scroll.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Customização do Modal PIX */
+.btn-gold-copy {
+    background: var(--gold-primary);
+    color: var(--white);
+    border: none;
+    font-size: 0.8rem;
+    padding: 5px 12px;
+}
+.btn-gold-copy:hover {
+    background: var(--gold-dark);
+    color: var(--white);
+}
+.pix-key-box {
+    border: 1px dashed var(--gold-primary);
+}
+
+/* Design Responsivo e Otimização Mobile */
+
+/* Telas Extra Grandes (Desktops) */
+@media screen and (min-width: 1200px) {
+    .container { max-width: 1140px; }
+}
+
+/* Telas Médias e Pequenas (Tablets e Celulares) */
+@media screen and (max-width: 991px) {
+    .section-padding { padding: 80px 0; }
+    .section-title { font-size: 2.5rem; }
+    .display-1 { font-size: 4rem; }
+}
+
+@media screen and (max-width: 768px) {
+    .section-padding { padding: 60px 0; }
+    .section-title { font-size: 2.2rem; }
+    .display-1 { font-size: 3rem; }
+    
+    /* Correção da Linha do Tempo para Mobile */
+    .timeline::after { left: 31px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left !important; }
+    .timeline-item.right { left: 0; }
+    .timeline-item::after { left: 25px; }
+    .timeline-item.right::after { left: 25px; }
+
+    /* Hero e Contagem Regressiva */
+    .hero { 
+        background-position: center center !important; /* Precisamente centralizado para mobile */
+        padding-top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .hero-content {
+        margin-top: -20px; /* Pequeno ajuste para elevar o conteúdo */
+    }
+    .monogram {
+        --logo-size: 120px;
+        --logo-font-size: 2.8rem;
+    }
+
+    .monogram-small { 
+        --logo-small-size: 100px;
+        --logo-small-font-size: 1.8rem;
+        margin: 0 auto 20px auto !important; /* Centralizado e com espaço acima dos nomes */
+    }
+    .monogram-small .amp { font-size: 0.9rem; }
+    
+    .display-1 { 
+        font-size: 2.8rem; 
+        line-height: 1.2;
+        margin-bottom: 15px !important;
+    }
+
+    /* Ajustes da Galeria para Mobile */
+    .gallery-item {
+        aspect-ratio: 1 / 1;
+    }
+    .gallery-item img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .section-title { font-size: 1.8rem; }
+    .display-1 { font-size: 2.5rem; }
+    .hero-content { padding: 0 15px; }
+    
+    /* Botões */
+    .btn { width: 100%; margin-bottom: 10px; }
+    
+    /* Contagem Regressiva 2x2 */
+    .countdown-item { 
+        padding: 8px; 
+        min-width: 60px; 
+    }
+    
+    /* Informações do Evento */
+    .event-info li { font-size: 0.9rem; }
+    
+    /* Modais */
+    .modal-dialog { margin: 10px; }
+    .pix-key-box { padding: 10px !important; }
+    .pix-key-box span { font-size: 0.9rem; word-break: break-all; }
+
+    /* Logo extra pequeno para celulares pequenos */
+    .monogram {
+        --logo-size: 100px;
+        --logo-font-size: 2.22rem;
+    }
+    .monogram .amp { font-size: 1rem; }
+}
+
+/* Ajustes para orientação paisagem */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero { height: auto; padding: 100px 0; }
+    .opening-content { padding: 20px 0; }
+}

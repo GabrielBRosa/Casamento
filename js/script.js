@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Temporizador de Contagem Regressiva ---
-    const targetDate = new Date('September 12, 2026 16:30:00').getTime();
+    const targetDate = new Date('September 12, 2026 17:00:00').getTime();
 
     const updateCountdown = () => {
         const now = new Date().getTime();
@@ -157,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Função de Copiar PIX ---
 function copyPix(elementId) {
-    const pixText = document.getElementById(elementId).innerText;
+    const element = document.getElementById(elementId);
+    const pixText = element.getAttribute('data-copy') || element.innerText;
     navigator.clipboard.writeText(pixText).then(() => {
         const toast = document.getElementById('copy-toast');
         toast.classList.remove('d-none');

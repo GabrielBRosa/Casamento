@@ -1,13 +1,13 @@
 /* Sistema de Design e Variáveis */
 :root {
-    --nude-light: #FBF7F2;
-    --nude-medium: #F5E6D3;
+    --nude-light: #FFF0F2; /* Soft Cherry Blossom Pink/Cream */
+    --nude-medium: #FCD5DB; /* Medium Cherry Blossom Pink */
     --gold-primary: #C5A059;
     --gold-dark: #A67C00;
-    --olive-dark: #556B2F;
+    --olive-dark: #782E3F; /* Elegant Cherry Blossom Burgundy/Wine */
     --white: #FFFFFF;
-    --text-dark: #333333;
-    --text-muted: #777777;
+    --text-dark: #3E272B; /* Dark Cherry Brown */
+    --text-muted: #8A6E73; /* Muted Rose Gray */
     --font-serif: 'Playfair Display', serif;
     --font-sans: 'Montserrat', sans-serif;
     --transition: all 0.4s ease;
@@ -26,6 +26,11 @@ body {
     background-color: var(--white);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+    height: 100vh;
 }
 
 .serif { font-family: var(--font-serif); }
@@ -173,10 +178,23 @@ section { overflow: hidden; }
     border-radius: 4px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    animation: envelope-pulse 2s infinite ease-in-out;
 }
 
 .envelope:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
+    animation-play-state: paused;
+}
+
+@keyframes envelope-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+    }
 }
 
 .animate-pulse {
@@ -317,6 +335,26 @@ section { overflow: hidden; }
 .opening-content {
     max-width: 500px;
     z-index: 2;
+}
+
+/* Instrução de clique no envelope */
+.click-instruction {
+    color: var(--white);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    padding: 12px 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(5px);
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .quote-text {
@@ -575,6 +613,12 @@ section { overflow: hidden; }
 }
 
 @media screen and (max-width: 576px) {
+    .click-instruction {
+        font-size: 0.95rem;
+        padding: 10px 22px;
+        gap: 8px;
+        margin-top: 20px;
+    }
     .section-title { font-size: 1.8rem; }
     .display-1 { font-size: 2.5rem; }
     .hero-content { padding: 0 15px; }
@@ -608,4 +652,42 @@ section { overflow: hidden; }
 @media screen and (max-height: 500px) and (orientation: landscape) {
     .hero { height: auto; padding: 100px 0; }
     .opening-content { padding: 20px 0; }
+}
+
+/* Animação de Pétalas de Cerejeira Flutuantes */
+.cherry-petals {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    background: linear-gradient(135deg, #FFC0CB 0%, #FFB7C5 100%);
+    border-radius: 150% 0 150% 150%;
+    opacity: 0.85;
+    animation: drift 12s linear infinite;
+    transform-origin: left top;
+}
+
+@keyframes drift {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg) scale(1);
+        opacity: 0.85;
+    }
+    50% {
+        transform: translateX(120px) rotate(180deg) scale(0.9);
+        opacity: 0.6;
+    }
+    100% {
+        top: 110%;
+        transform: translateX(-60px) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
 }

@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgMusic = document.getElementById('bg-music');
     const btnMusic = document.getElementById('btn-music');
 
+    // Evita rolagem da página de fundo ao interagir com o overlay no mobile
+    openingOverlay.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+    }, { passive: false });
+
     envelope.addEventListener('click', () => {
         envelope.classList.add('open');
 
@@ -16,9 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Espera a animação do envelope terminar antes de remover o overlay
         setTimeout(() => {
             openingOverlay.classList.add('closed');
-            // Remove o overlay do DOM após a animação de deslize
+            // Remove o overlay do DOM após a animação de deslize e destrava o scroll
             setTimeout(() => {
                 openingOverlay.style.display = 'none';
+                document.body.classList.remove('no-scroll');
             }, 1000);
         }, 1500);
     });
